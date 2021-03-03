@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang=”en”>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -44,6 +44,11 @@
     right: 20px;
     z-index: 2;
 }
+        #camera--output{
+             height: 200%;
+             width: 200%;
+        }
+   
     </style>
 </head>
 <body>   
@@ -51,7 +56,8 @@
         <canvas id="camera--sensor"></canvas>        
         <video id="camera--view" autoplay playsinline></video>   
         <img src="//:0" alt="" id="camera--output">        
-        <button id="camera--trigger">Take a picture</button>    </main>    
+        <button id="camera--trigger">Take a picture!!</button>    </main> 
+        <h1 id = "D">The Camera Website!!</h1>
     <script>
     var constraints = { video: { facingMode: "user" }, audio: false };
 const cameraView = document.querySelector("#camera--view"),
@@ -66,15 +72,17 @@ function cameraStart() {
         cameraView.srcObject = stream;
     })
     .catch(function(error) {
-        console.error("Oops. Something is broken.", error);
+        console.error("Oops. Something is broken. Please wait a minute and reload the page if you can.", error);
     });
 }
 cameraTrigger.onclick = function() {
+var yes =document.getElementById("D"); 
     cameraSensor.width = cameraView.videoWidth;
     cameraSensor.height = cameraView.videoHeight;
     cameraSensor.getContext("2d").drawImage(cameraView, 0, 0);
     cameraOutput.src = cameraSensor.toDataURL("image/webp");
     cameraOutput.classList.add("taken");
+    yes.hide();
 };
 window.addEventListener("load", cameraStart, false);
     </script>
